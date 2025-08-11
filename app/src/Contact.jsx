@@ -61,7 +61,7 @@ Please respond to my enquiry at your earliest convenience. Thank you! 🙏
       "Redirecting to WhatsApp with your enquiry details! Please send the message and we will get back to you within 24 hours."
     );
 
-    // Optional: Reset form after submission
+    // Reset form after submission
     setEnquiryForm({
       name: "",
       email: "",
@@ -69,6 +69,16 @@ Please respond to my enquiry at your earliest convenience. Thank you! 🙏
       subject: "",
       message: "",
     });
+  };
+
+  const openGoogleMaps = () => {
+    const address =
+      "Plot No 14, Vijayapuri Colony, Above Union Bank Of India, Netaji Nagar X Road, Hyderabad, Kapra-500062, Telangana, India";
+    const encodedAddress = encodeURIComponent(address);
+    window.open(
+      `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`,
+      "_blank"
+    );
   };
 
   return (
@@ -85,14 +95,14 @@ Please respond to my enquiry at your earliest convenience. Thank you! 🙏
         <div className="contact-content">
           <div className="contact-info">
             <h3>Visit Our Spa</h3>
+
             <div className="contact-item">
               <h4>📍 Address</h4>
               <p>
-                123 Wellness Street
-                <br />
-                Spa District, City - 560001
-                <br />
-                Karnataka, India
+                Plot No 14, Vijayapuri Colony, Above Union Bank Of India, Netaji
+                Nagar X Road <br />
+                Hyderabad, Kapra-500062 <br />
+                Telangana, India
               </p>
             </div>
 
@@ -100,20 +110,14 @@ Please respond to my enquiry at your earliest convenience. Thank you! 🙏
               <h4>📞 Phone</h4>
               <p>
                 <a href="tel:+916309308175">+91 63093 08175</a>
-                <br />
-                <a href="tel:+919876543210">+91 98765 43210</a>
               </p>
             </div>
 
             <div className="contact-item">
               <h4>✉️ Email</h4>
               <p>
-                <a href="mailto:info@zenwellnessspa.com">
-                  info@zenwellnessspa.com
-                </a>
-                <br />
-                <a href="mailto:bookings@zenwellnessspa.com">
-                  bookings@zenwellnessspa.com
+                <a href="mailto:zenwellnesssaloonandspa@gmail.com">
+                  zenwellnesssaloonandspa@gmail.com
                 </a>
               </p>
             </div>
@@ -130,18 +134,18 @@ Please respond to my enquiry at your earliest convenience. Thank you! 🙏
             <div className="social-media">
               <h4>Follow Us</h4>
               <div className="social-links">
-                <a href="#" className="social-link">
+                <a href="#" className="social-link facebook">
                   📘 Facebook
                 </a>
-                <a href="#" className="social-link">
+                <a href="#" className="social-link instagram">
                   📷 Instagram
                 </a>
-                <a href="#" className="social-link">
+                <a href="#" className="social-link twitter">
                   🐦 Twitter
                 </a>
                 <a
                   href="#"
-                  className="social-link"
+                  className="social-link whatsapp"
                   onClick={(e) => {
                     e.preventDefault();
                     const message = encodeURIComponent(
@@ -254,10 +258,49 @@ Please respond to my enquiry at your earliest convenience. Thank you! 🙏
 
         <div className="map-section">
           <h3>Find Us on Map</h3>
-          <div className="map-placeholder">
-            <p>🗺️ Interactive Map Location</p>
-            <p>123 Wellness Street, Spa District, City - 560001</p>
-            <p>Click here to open in Google Maps</p>
+          <div className="map-container">
+            <div className="map-info">
+              <p>🗺️ Our Location</p>
+              <p className="address-text">
+                Plot No 14, Vijayapuri Colony, Above Union Bank Of India, Netaji
+                Nagar X Road, Kapra-500062, Hyderabad, Telangana
+              </p>
+            </div>
+
+            {/* Working Google Maps Embed */}
+            <div className="map-embed">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.8234567890123!2d78.55435!3d17.485475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDI5JzA3LjciTiA3OMKwMzMnMTUuNyJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                width="100%"
+                height="350"
+                style={{ border: 0, borderRadius: "15px" }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Zen Wellness Spa Location"
+              ></iframe>
+            </div>
+
+            <div className="map-actions">
+              <button className="map-btn" onClick={openGoogleMaps}>
+                🗺️ Open in Google Maps
+              </button>
+              <button
+                className="map-btn directions-btn"
+                onClick={() => {
+                  const destination =
+                    "Plot No 14, Vijayapuri Colony, Netaji Nagar X Road, Kapra-500062, Hyderabad";
+                  window.open(
+                    `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                      destination
+                    )}`,
+                    "_blank"
+                  );
+                }}
+              >
+                🧭 Get Directions
+              </button>
+            </div>
           </div>
         </div>
       </div>

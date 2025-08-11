@@ -120,7 +120,10 @@ const Footer = () => {
             <div className="contact-items">
               <div className="contact-item">
                 <span>📍</span>
-                <p>123 Wellness Street, City - 560001</p>
+                <p>
+                  Plot No 14, Vijayapuri Colony, Above Union Bank Of India,
+                  Netaji Nagar X Road, Kapra-500062
+                </p>
               </div>
               <div className="contact-item">
                 <span>📞</span>
