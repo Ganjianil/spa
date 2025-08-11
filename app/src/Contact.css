@@ -36,6 +36,16 @@
   margin: 0;
 }
 
+.contact-item a {
+  color: #8e44ad;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: #7d3c98;
+}
+
 .social-media {
   margin-top: 40px;
 }
@@ -115,6 +125,11 @@
   background: white;
 }
 
+.enquiry-form input::placeholder,
+.enquiry-form textarea::placeholder {
+  color: #999;
+}
+
 .enquiry-form input:focus,
 .enquiry-form select:focus,
 .enquiry-form textarea:focus {
@@ -125,7 +140,7 @@
 
 .enquiry-form .submit-btn {
   padding: 15px 30px;
-  background: linear-gradient(45deg, #8e44ad, #3498db);
+  background: linear-gradient(45deg, #25d366, #128c7e);
   color: white;
   border: none;
   border-radius: 8px;
@@ -138,7 +153,15 @@
 
 .enquiry-form .submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(142, 68, 173, 0.3);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+}
+
+.form-note {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  margin-top: 15px;
+  font-style: italic;
 }
 
 .map-section {
@@ -158,6 +181,13 @@
   border-radius: 15px;
   font-size: 1.2rem;
   font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.map-placeholder:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
 .map-placeholder p {
