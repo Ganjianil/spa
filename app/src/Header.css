@@ -1,96 +1,62 @@
+/* Header Styles */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   z-index: 1000;
   transition: all 0.3s ease;
+  height: 80px;
 }
 
-.header .container {
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  height: 70px;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 100%;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
 }
 
-.logo h2 {
-  color: #8e44ad;
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
-.nav ul {
-  display: flex;
-  list-style: none;
-  align-items: center;
-  gap: 30px;
-}
-
-.nav a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  transition: color 0.3s ease;
-  position: relative;
-}
-
-.nav a:hover {
-  color: #8e44ad;
-}
-
-.nav a::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #8e44ad;
-  transition: width 0.3s ease;
-}
-
-.nav a:hover::after {
-  width: 100%;
-}
-
-.book-btn {
-  background: linear-gradient(45deg, #8e44ad, #3498db) !important;
-  color: white !important;
-  padding: 10px 20px !important;
-  border-radius: 25px !important;
-  border: none !important;
-  cursor: pointer !important;
-  font-weight: 500 !important;
-  transition: transform 0.3s ease !important;
-}
-
-.book-btn:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3) !important;
-}
-
+/* Hamburger Menu */
 .hamburger {
   display: none;
   flex-direction: column;
+  background: none;
+  border: none;
   cursor: pointer;
-  gap: 4px;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
   z-index: 1001;
 }
 
+.hamburger:hover {
+  background: rgba(212, 175, 55, 0.1);
+}
+
 .hamburger span {
-  width: 25px;
+  width: 24px;
   height: 3px;
-  background: #333;
+  background: #2c3e50;
+  margin: 2px 0;
   transition: all 0.3s ease;
-  transform-origin: center;
+  border-radius: 2px;
 }
 
 .hamburger-active span:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
+  transform: rotate(45deg) translate(5px, 5px);
+  background: white;
 }
 
 .hamburger-active span:nth-child(2) {
@@ -98,11 +64,397 @@
 }
 
 .hamburger-active span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+  transform: rotate(-45deg) translate(7px, -6px);
+  background: white;
 }
 
-.menu-overlay {
+/* Logo Styles */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.logo-image {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
+}
+
+.header.scrolled .logo-image {
+  height: 40px;
+}
+
+.logo-text {
+  font-size: 1.6rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #d4af37, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.header.scrolled .logo-text {
+  font-size: 1.4rem;
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+  display: flex;
+}
+
+.desktop-nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 30px;
+}
+
+.desktop-nav a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  padding: 8px 0;
+  position: relative;
+}
+
+.desktop-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #d4af37, #ffd700);
+  transition: width 0.3s ease;
+}
+
+.desktop-nav a:hover::after {
+  width: 100%;
+}
+
+.desktop-nav a:hover {
+  color: #d4af37;
+}
+
+/* Desktop Book Button */
+.desktop-book-btn {
+  background: linear-gradient(135deg, #d4af37, #ffd700);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  white-space: nowrap;
+}
+
+.desktop-book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  background: linear-gradient(135deg, #ffd700, #d4af37);
+}
+
+/* Mobile Book Button in Header */
+.mobile-book-btn-header {
   display: none;
+  background: linear-gradient(135deg, #d4af37, #ffd700);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+}
+
+.mobile-book-btn-header:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.95) 0%,
+    rgba(255, 215, 0, 0.95) 25%,
+    rgba(142, 68, 173, 0.95) 50%,
+    rgba(52, 152, 219, 0.95) 75%,
+    rgba(46, 204, 113, 0.95) 100%
+  );
+  backdrop-filter: blur(20px);
+  animation: gradientShift 10s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background: linear-gradient(
+      135deg,
+      rgba(212, 175, 55, 0.95) 0%,
+      rgba(255, 215, 0, 0.95) 25%,
+      rgba(142, 68, 173, 0.95) 50%,
+      rgba(52, 152, 219, 0.95) 75%,
+      rgba(46, 204, 113, 0.95) 100%
+    );
+  }
+  33% {
+    background: linear-gradient(
+      135deg,
+      rgba(46, 204, 113, 0.95) 0%,
+      rgba(212, 175, 55, 0.95) 25%,
+      rgba(255, 215, 0, 0.95) 50%,
+      rgba(142, 68, 173, 0.95) 75%,
+      rgba(52, 152, 219, 0.95) 100%
+    );
+  }
+  66% {
+    background: linear-gradient(
+      135deg,
+      rgba(52, 152, 219, 0.95) 0%,
+      rgba(46, 204, 113, 0.95) 25%,
+      rgba(212, 175, 55, 0.95) 50%,
+      rgba(255, 215, 0, 0.95) 75%,
+      rgba(142, 68, 173, 0.95) 100%
+    );
+  }
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  position: relative;
+  z-index: 1000;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.mobile-menu-header {
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeInDown 0.5s ease;
+}
+
+.mobile-logo {
+  height: 60px;
+  width: auto;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.mobile-menu-header h3 {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 350px;
+}
+
+.mobile-menu-list li {
+  margin-bottom: 15px;
+  animation: slideInFromLeft 0.5s ease forwards;
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.mobile-menu-list li:nth-child(1) { animation-delay: 0.1s; }
+.mobile-menu-list li:nth-child(2) { animation-delay: 0.15s; }
+.mobile-menu-list li:nth-child(3) { animation-delay: 0.2s; }
+.mobile-menu-list li:nth-child(4) { animation-delay: 0.25s; }
+.mobile-menu-list li:nth-child(5) { animation-delay: 0.3s; }
+.mobile-menu-list li:nth-child(6) { animation-delay: 0.35s; }
+.mobile-menu-list li:nth-child(7) { animation-delay: 0.4s; }
+
+@keyframes slideInFromLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-menu-list a,
+.mobile-book-btn {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mobile-book-btn {
+  background: rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+  justify-content: center;
+}
+
+.mobile-menu-list a:hover,
+.mobile-book-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.menu-icon {
+  font-size: 1.2rem;
+  min-width: 25px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-book-btn-header {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 15px;
+  }
+
+  .logo-text {
+    font-size: 1.4rem;
+  }
+
+  .header.scrolled .logo-text {
+    font-size: 1.2rem;
+  }
+
+  .logo-image {
+    height: 40px;
+  }
+
+  .header.scrolled .logo-image {
+    height: 35px;
+  }
+
+  .mobile-nav {
+    padding: 30px 15px;
+  }
+
+  .mobile-menu-list {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    height: 70px;
+  }
+
+  .header.scrolled {
+    height: 60px;
+  }
+
+  .logo-text {
+    font-size: 1.2rem;
+  }
+
+  .header.scrolled .logo-text {
+    font-size: 1.1rem;
+  }
+
+  .logo-image {
+    height: 35px;
+  }
+
+  .header.scrolled .logo-image {
+    height: 30px;
+  }
+
+  .mobile-book-btn-header {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .mobile-menu-list a,
+  .mobile-book-btn {
+    padding: 12px 15px;
+    font-size: 1rem;
+  }
 }
 
 /* Booking Modal Styles */
@@ -119,11 +471,6 @@
   z-index: 2000;
   padding: 20px;
   animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 .booking-modal {
@@ -223,114 +570,23 @@
   opacity: 0.8;
 }
 
-/* Mobile Styles */
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu-background {
+    animation: none;
   }
-  
-  .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(20px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: translateX(-100%);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 999;
-  }
-  
-  .nav-open {
-    transform: translateX(0);
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .nav ul {
-    flex-direction: column;
-    gap: 30px;
-    text-align: center;
-  }
-  
-  .nav a {
-    font-size: 1.2rem;
-    color: #333;
-  }
-  
-  .book-btn {
-    font-size: 1.1rem !important;
-    padding: 12px 25px !important;
-  }
-  
-  .menu-overlay {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 998;
-  }
-  
-  .logo h2 {
-    font-size: 1.5rem;
-  }
-  
-  .booking-modal {
-    padding: 25px;
-    margin: 10px;
-  }
-  
-  .booking-options {
-    gap: 12px;
-  }
-  
-  .booking-option {
-    padding: 15px;
-    gap: 15px;
-  }
-  
-  .option-icon {
-    font-size: 1.5rem;
-    min-width: 40px;
-  }
-  
-  .option-content h4 {
-    font-size: 1.1rem;
-  }
-  
-  .option-content p {
-    font-size: 0.85rem;
-  }
-}
 
-@media (max-width: 480px) {
-  .header .container {
-    padding: 12px 15px;
+  .mobile-menu-list li {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
-  
-  .logo h2 {
-    font-size: 1.3rem;
+
+  .mobile-menu-header {
+    animation: none;
   }
-  
-  .booking-modal {
-    padding: 20px;
-  }
-  
-  .booking-modal-header h3 {
-    font-size: 1.3rem;
-  }
-  
-  .booking-option {
-    padding: 12px;
-    gap: 12px;
+
+  * {
+    transition: none !important;
   }
 }

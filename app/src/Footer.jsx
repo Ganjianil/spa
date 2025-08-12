@@ -39,14 +39,12 @@ const Footer = () => {
         </div>
       </div>
     `;
-
     document.body.appendChild(modal);
     document.body.style.overflow = "hidden";
 
     // Add click handlers
     modal.addEventListener("click", (e) => {
       const action = e.target.closest("[data-action]")?.dataset.action;
-
       if (action === "call") {
         window.location.href = "tel:+916309308175";
         document.body.removeChild(modal);
@@ -72,6 +70,15 @@ const Footer = () => {
     }
   };
 
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    const email = e.target.querySelector('input[type="email"]').value;
+    if (email) {
+      alert("Thank you for subscribing to our newsletter!");
+      e.target.querySelector('input[type="email"]').value = "";
+    }
+  };
+
   return (
     <footer className="footer">
       {/* Wave Decoration */}
@@ -84,72 +91,134 @@ const Footer = () => {
         </svg>
       </div>
 
-      <div className="container">
+      <div className="footer-container">
         <div className="footer-content">
           {/* Logo & Description */}
           <div className="footer-brand">
-            <h3>🧘‍♀️ Zen Wellness Spa</h3>
-            <p>Your sanctuary for ultimate relaxation and rejuvenation</p>
+            <div className="brand-logo">
+              <img
+                src="/logo.jpeg"
+                alt="Zen Wellness Spa Logo"
+                className="footer-logo"
+                onError={(e) => {
+                  console.log("Logo failed to load");
+                  e.target.style.display = "none";
+                }}
+                onLoad={() => {
+                  console.log("Logo loaded successfully");
+                }}
+              />
+              <h3>Zen Wellness Spa</h3>
+            </div>
+            <p>
+              Your sanctuary for ultimate relaxation and rejuvenation.
+              Experience the perfect blend of traditional wellness practices and
+              modern spa luxury.
+            </p>
             <button className="cta-book-btn" onClick={handleBookNow}>
-              📞 Book Now
+              <span className="btn-icon">✨</span>
+              <span>Book Your Session</span>
             </button>
           </div>
 
           {/* Quick Links */}
-          <div className="footer-links-section">
+          <div className="footer-section">
             <h4>Quick Links</h4>
-            <div className="links-grid">
+            <div className="footer-links">
               <a href="#home" onClick={() => scrollToSection("home")}>
+                <span className="link-icon">🏠</span>
                 Home
               </a>
               <a href="#about" onClick={() => scrollToSection("about")}>
-                About
+                <span className="link-icon">ℹ️</span>
+                About Us
               </a>
               <a href="#services" onClick={() => scrollToSection("services")}>
+                <span className="link-icon">💆‍♀️</span>
                 Services
               </a>
+              <a href="#amenities" onClick={() => scrollToSection("amenities")}>
+                <span className="link-icon">🌿</span>
+                Amenities
+              </a>
               <a href="#deals" onClick={() => scrollToSection("deals")}>
+                <span className="link-icon">🎯</span>
                 Deals
+              </a>
+              <a href="#contact" onClick={() => scrollToSection("contact")}>
+                <span className="link-icon">📞</span>
+                Contact
               </a>
             </div>
           </div>
 
           {/* Contact Info */}
-          <div className="footer-contact">
-            <h4>Contact</h4>
-            <div className="contact-items">
+          <div className="footer-section">
+            <h4>Contact Information</h4>
+            <div className="contact-info">
               <div className="contact-item">
-                <span>📍</span>
-                <p>
-                  Plot No 14, Vijayapuri Colony, Above Union Bank Of India,
-                  Netaji Nagar X Road, Kapra-500062
-                </p>
+                <span className="contact-icon">📍</span>
+                <div className="contact-details">
+                  <h5>Visit Us</h5>
+                  <p>
+                    Plot No 14, Vijayapuri Colony
+                    <br />
+                    Above Union Bank Of India
+                    <br />
+                    Netaji Nagar X Road, Kapra-500062
+                  </p>
+                </div>
               </div>
               <div className="contact-item">
-                <span>📞</span>
-                <p>
-                  <a href="tel:+916309308175">+91 63093 08175</a>
-                </p>
+                <span className="contact-icon">📞</span>
+                <div className="contact-details">
+                  <h5>Call Us</h5>
+                  <p>
+                    <a href="tel:+916309308175">+91 63093 08175</a>
+                  </p>
+                </div>
               </div>
               <div className="contact-item">
-                <span>⏰</span>
-                <p>Mon-Sun: 10AM - 8PM</p>
+                <span className="contact-icon">⏰</span>
+                <div className="contact-details">
+                  <h5>Working Hours</h5>
+                  <p>
+                    Monday - Sunday
+                    <br />
+                    10:00 AM - 8:00 PM
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Social & Newsletter */}
-          <div className="footer-social-section">
+          <div className="footer-section">
             <h4>Stay Connected</h4>
             <div className="social-links">
-              <a href="#" className="social-btn facebook">
-                📘
+              <a
+                href="https://www.facebook.com/zenwellnesssaloonandspa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-btn facebook"
+                aria-label="Follow us on Facebook"
+              >
+                <div className="social-icon facebook-icon">
+                  <span>f</span>
+                </div>
+                <span className="social-text">Facebook</span>
               </a>
-              <a href="#" className="social-btn instagram">
-                📷
-              </a>
-              <a href="#" className="social-btn twitter">
-                🐦
+              <a
+                href="https://www.instagram.com/zenwellness.saloonandspa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-btn instagram"
+                aria-label="Follow us on Instagram"
+              >
+                <div className="social-icon instagram-icon">
+                  <span>📷</span>
+                </div>
+                <span className="social-text">Instagram</span>
               </a>
               <a
                 href="#"
@@ -164,13 +233,34 @@ const Footer = () => {
                     "_blank"
                   );
                 }}
+                aria-label="Chat with us on WhatsApp"
               >
-                💬
+                <div className="social-icon whatsapp-icon">
+                  <span>💬</span>
+                </div>
+                <span className="social-text">WhatsApp</span>
               </a>
             </div>
-            <div className="newsletter-mini">
-              <input type="email" placeholder="Your email" />
-              <button>✉️</button>
+
+            <div className="newsletter">
+              <h5>Newsletter</h5>
+              <p>Subscribe for exclusive offers and wellness tips</p>
+              <form
+                className="newsletter-form"
+                onSubmit={handleNewsletterSubmit}
+              >
+                <div className="input-group">
+                  <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    required
+                  />
+                  <button type="submit" aria-label="Subscribe to newsletter">
+                    <span>Subscribe</span>
+                    <span className="btn-arrow">→</span>
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -178,11 +268,26 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="footer-bottom">
           <div className="footer-bottom-content">
-            <p>&copy; {currentYear} Zen Wellness Spa. All rights reserved.</p>
+            <div className="copyright">
+              <p>&copy; {currentYear} Zen Wellness Spa. All rights reserved.</p>
+              <div className="legal-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+              </div>
+            </div>
             <div className="footer-badges">
-              <span className="badge">⭐ 4.9/5 Rating</span>
-              <span className="badge">🏆 Best Spa 2023</span>
-              <span className="badge">🌿 100% Natural</span>
+              <div className="badge">
+                <span className="badge-icon">⭐</span>
+                <span>4.9/5 Rating</span>
+              </div>
+              <div className="badge">
+                <span className="badge-icon">🏆</span>
+                <span>Best Spa 2024</span>
+              </div>
+              <div className="badge">
+                <span className="badge-icon">🌿</span>
+                <span>100% Natural</span>
+              </div>
             </div>
           </div>
         </div>
@@ -190,6 +295,7 @@ const Footer = () => {
 
       {/* Floating Particles */}
       <div className="particles">
+        <div className="particle"></div>
         <div className="particle"></div>
         <div className="particle"></div>
         <div className="particle"></div>

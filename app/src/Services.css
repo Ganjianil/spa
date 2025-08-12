@@ -25,7 +25,7 @@
 .services .section-header {
   position: relative;
   z-index: 2;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
 }
 
 .services .section-header h2 {
@@ -63,23 +63,27 @@
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+/* Reduced Grid Size */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
   position: relative;
   z-index: 2;
 }
 
+/* Smaller Service Cards */
 .service-card {
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 25px;
+  border-radius: 20px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   position: relative;
   animation: slideInUp 0.6s ease-out;
   animation-fill-mode: both;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .service-card:nth-child(1) { animation-delay: 0.1s; }
@@ -100,8 +104,8 @@
 }
 
 .service-card:hover {
-  transform: translateY(-15px) scale(1.02);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .service-card::before {
@@ -110,7 +114,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 3px;
   background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #ff6b6b);
   background-size: 300% 100%;
   animation: borderFlow 3s ease infinite;
@@ -122,12 +126,12 @@
   50% { background-position: 100% 50%; }
 }
 
-/* Service Image Section */
+/* Service Image Section - Always Show Title */
 .service-image {
   position: relative;
-  height: 280px;
+  height: 200px;
   overflow: hidden;
-  border-radius: 25px 25px 0 0;
+  border-radius: 20px 20px 0 0;
 }
 
 .service-image img {
@@ -138,51 +142,59 @@
 }
 
 .service-card:hover .service-image img {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
+/* Service Overlay - Always Visible */
 .service-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-  padding: 40px 30px 25px;
-  transform: translateY(100%);
+  padding: 30px 20px 20px;
+  transform: translateY(0); /* Always visible */
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .service-card:hover .service-overlay {
-  transform: translateY(0);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+  padding: 35px 20px 25px;
 }
 
 .service-overlay h3 {
   color: white;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   margin: 0;
+  text-align: center;
 }
 
-/* Service Content */
+/* Reduced Service Content Padding */
 .service-content {
-  padding: 35px;
+  padding: 25px;
   position: relative;
 }
 
 .service-description {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: #555;
-  margin-bottom: 25px;
-  line-height: 1.7;
+  margin-bottom: 20px;
+  line-height: 1.6;
   font-weight: 400;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
+/* Compact Service Pricing */
 .service-pricing {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  border-radius: 15px;
-  padding: 20px;
+  border-radius: 12px;
+  padding: 15px;
   border: 1px solid #dee2e6;
 }
 
@@ -190,11 +202,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  padding: 10px 15px;
   background: white;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
@@ -203,31 +215,32 @@
 }
 
 .price-option:hover {
-  transform: translateX(5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateX(3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .duration {
   font-weight: 600;
   color: #2c3e50;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .price {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: #e74c3c;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+/* Compact Service Benefits */
 .service-benefits {
-  margin-bottom: 35px;
+  margin-bottom: 25px;
 }
 
 .service-benefits h4 {
   color: #2c3e50;
-  margin-bottom: 15px;
-  font-size: 1.2rem;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
   font-weight: 600;
   position: relative;
 }
@@ -235,9 +248,9 @@
 .service-benefits h4::after {
   content: '';
   position: absolute;
-  bottom: -5px;
+  bottom: -3px;
   left: 0;
-  width: 40px;
+  width: 30px;
   height: 2px;
   background: linear-gradient(45deg, #8e44ad, #3498db);
 }
@@ -248,11 +261,11 @@
 }
 
 .service-benefits li {
-  padding: 8px 0;
+  padding: 5px 0;
   color: #666;
   position: relative;
-  padding-left: 25px;
-  font-size: 1rem;
+  padding-left: 20px;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
 }
 
@@ -261,30 +274,31 @@
   position: absolute;
   left: 0;
   color: #27ae60;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .service-benefits li:hover {
   color: #2c3e50;
-  transform: translateX(5px);
+  transform: translateX(3px);
 }
 
+/* Smaller Book Button */
 .book-service-btn {
   width: 100%;
-  padding: 18px 25px;
+  padding: 14px 20px;
   background: linear-gradient(45deg, #8e44ad, #3498db);
   color: white;
   border: none;
-  border-radius: 50px;
-  font-size: 1.2rem;
+  border-radius: 25px;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 10px 25px rgba(142, 68, 173, 0.3);
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 20px rgba(142, 68, 173, 0.3);
 }
 
 .book-service-btn::before {
@@ -299,8 +313,8 @@
 }
 
 .book-service-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(142, 68, 173, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(142, 68, 173, 0.4);
   background: linear-gradient(45deg, #9b59b6, #3498db);
 }
 
@@ -435,60 +449,65 @@
   .services {
     padding: 80px 0;
   }
-  
+
   .services .section-header h2 {
     font-size: 2.2rem;
   }
-  
+
   .services-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
   }
-  
+
+  .service-card {
+    max-width: none;
+  }
+
   .service-image {
-    height: 240px;
+    height: 180px;
   }
-  
+
   .service-content {
-    padding: 25px;
+    padding: 20px;
   }
-  
+
   .service-description {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    -webkit-line-clamp: 2;
   }
-  
+
   .price {
-    font-size: 1.2rem;
-  }
-  
-  .book-service-btn {
     font-size: 1.1rem;
-    padding: 15px 20px;
   }
-  
+
+  .book-service-btn {
+    font-size: 0.95rem;
+    padding: 12px 18px;
+  }
+
   .booking-modal {
     padding: 25px;
     margin: 10px;
   }
-  
+
   .booking-options {
     gap: 12px;
   }
-  
+
   .booking-option {
     padding: 15px;
     gap: 15px;
   }
-  
+
   .option-icon {
     font-size: 1.5rem;
     min-width: 40px;
   }
-  
+
   .option-content h4 {
     font-size: 1.1rem;
   }
-  
+
   .option-content p {
     font-size: 0.85rem;
   }
@@ -498,43 +517,47 @@
   .services {
     padding: 60px 0;
   }
-  
+
   .services .section-header h2 {
     font-size: 1.8rem;
   }
-  
+
   .services-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    gap: 20px;
   }
-  
+
   .service-image {
-    height: 200px;
+    height: 160px;
   }
-  
+
   .service-content {
-    padding: 20px;
+    padding: 18px;
   }
-  
+
   .service-pricing {
-    padding: 15px;
+    padding: 12px;
   }
-  
+
   .price-option {
-    padding: 12px 15px;
+    padding: 8px 12px;
   }
-  
+
   .booking-modal {
     padding: 20px;
   }
-  
+
   .booking-modal-header h3 {
     font-size: 1.3rem;
   }
-  
+
   .booking-option {
     padding: 12px;
     gap: 12px;
+  }
+
+  .service-overlay h3 {
+    font-size: 1.2rem;
   }
 }
 
@@ -557,7 +580,7 @@
   .booking-modal {
     animation: none;
   }
-  
+
   .service-card:hover,
   .booking-option:hover {
     transform: none;
@@ -570,7 +593,7 @@
     background: white;
     border: 2px solid #000;
   }
-  
+
   .service-overlay {
     background: rgba(0, 0, 0, 0.9);
   }

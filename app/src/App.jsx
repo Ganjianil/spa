@@ -11,7 +11,7 @@ import Contact from './Contact';
 import Footer from './Footer';
 import Images from './Images';
 import Stats from './Stats';
-
+import MapEmbed from './MapEmbed';
 function App() {
   return (
     <div className="App">
@@ -23,9 +23,8 @@ function App() {
 
       <Amenities />
 
-      <Deals />
       <BookNow />
-      <Contact />
+      <MapEmbed/>
       <Footer />
     </div>
   );

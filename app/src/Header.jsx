@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
-
+import logo from "/logo.jpeg"
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -16,6 +17,15 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -23,7 +33,6 @@ const Header = () => {
         setIsMenuOpen(false);
       }
     };
-
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, [isMenuOpen]);
@@ -35,14 +44,12 @@ const Header = () => {
     } else {
       document.body.style.overflow = "unset";
     }
-
     return () => {
       document.body.style.overflow = "unset";
     };
   }, [isMenuOpen]);
 
   const handleBookNow = () => {
-    // Create custom modal for 3 options
     const modal = document.createElement("div");
     modal.className = "booking-modal-overlay";
     modal.innerHTML = `
@@ -76,14 +83,11 @@ const Header = () => {
         </div>
       </div>
     `;
-
     document.body.appendChild(modal);
     document.body.style.overflow = "hidden";
 
-    // Add click handlers
     modal.addEventListener("click", (e) => {
       const action = e.target.closest("[data-action]")?.dataset.action;
-
       if (action === "call") {
         window.location.href = "tel:+916309308175";
         document.body.removeChild(modal);
@@ -103,66 +107,130 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
-      <div className="container">
-        <div className="logo">
-          <h2>Zen Wellness Spa</h2>
+    <>
+      <header className={`header ${isScrolled ? "scrolled" : ""}`}>
+        <div className="header-container">
+          {/* Hamburger Menu - Left Side */}
+          <button
+            className={`hamburger ${isMenuOpen ? "hamburger-active" : ""}`}
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          {/* Logo - Center */}
+          <div className="logo">
+            <img
+              src={logo}
+              alt="Zen Wellness Spa Logo"
+              className="logo-image"
+            />
+            <span className="logo-text">Zen Wellness Spa</span>
+          </div>
+
+          {/* Desktop Navigation - Right */}
+          <nav className="desktop-nav">
+            <ul>
+              <li>
+                <a href="#home" onClick={() => scrollToSection("home")}>
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#about" onClick={() => scrollToSection("about")}>
+                  About
+                </a>
+              </li>
+              <li>
+                <a href="#services" onClick={() => scrollToSection("services")}>
+                  Services
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#amenities"
+                  onClick={() => scrollToSection("amenities")}
+                >
+                  Amenities
+                </a>
+              </li>
+              <li>
+                <a href="#deals" onClick={() => scrollToSection("deals")}>
+                  Deals
+                </a>
+              </li>
+              <li>
+                <a href="#contact" onClick={() => scrollToSection("contact")}>
+                  Contact
+                </a>
+              </li>
+              <li>
+                <button onClick={handleBookNow} className="desktop-book-btn">
+                  Book Now
+                </button>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Mobile Book Button - Right Side */}
+          <button onClick={handleBookNow} className="mobile-book-btn-header">
+            Book
+          </button>
         </div>
-        <nav className={`nav ${isMenuOpen ? "nav-open" : ""}`}>
-          <ul>
+      </header>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`mobile-menu-overlay ${isMenuOpen ? "active" : ""}`}>
+        <div className="mobile-menu-background"></div>
+        <nav className="mobile-nav">
+          <div className="mobile-menu-header">
+            <img
+              src={logo}
+              alt="Zen Wellness Spa Logo"
+              className="mobile-logo"
+            />
+            <h3>Zen Wellness Spa</h3>
+          </div>
+          <ul className="mobile-menu-list">
             <li>
               <a href="#home" onClick={() => scrollToSection("home")}>
-                Home
+                <span className="menu-icon">🏠</span>
+                <span>Home</span>
               </a>
             </li>
             <li>
               <a href="#about" onClick={() => scrollToSection("about")}>
-                About Us
+                <span className="menu-icon">ℹ️</span>
+                <span>About Us</span>
               </a>
             </li>
             <li>
               <a href="#services" onClick={() => scrollToSection("services")}>
-                Services
+                <span className="menu-icon">💆‍♀️</span>
+                <span>Services</span>
               </a>
             </li>
             <li>
               <a href="#amenities" onClick={() => scrollToSection("amenities")}>
-                Amenities
+                <span className="menu-icon">🌿</span>
+                <span>Amenities</span>
               </a>
             </li>
+
+
             <li>
-              <a href="#deals" onClick={() => scrollToSection("deals")}>
-                Deals
-              </a>
-            </li>
-            <li>
-              <a href="#contact" onClick={() => scrollToSection("contact")}>
-                Contact
-              </a>
-            </li>
-            <li>
-              <button onClick={handleBookNow} className="book-btn">
-                Book Now
+              <button onClick={handleBookNow} className="mobile-book-btn">
+                <span className="menu-icon">✨</span>
+                <span>Book Appointment</span>
               </button>
             </li>
           </ul>
         </nav>
-        <div
-          className={`hamburger ${isMenuOpen ? "hamburger-active" : ""}`}
-          onClick={toggleMenu}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
       </div>
-      {isMenuOpen && (
-        <div
-          className="menu-overlay"
-          onClick={() => setIsMenuOpen(false)}
-        ></div>
-      )}
-    </header>
+    </>
   );
 };
 
