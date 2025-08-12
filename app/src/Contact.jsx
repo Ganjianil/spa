@@ -83,6 +83,15 @@ Please respond to my enquiry at your earliest convenience. Thank you! 🙏
 
   return (
     <section id="contact" className="contact">
+      <div className="contact-background">
+        <div className="floating-shapes">
+          <div className="shape shape-1"></div>
+          <div className="shape shape-2"></div>
+          <div className="shape shape-3"></div>
+          <div className="shape shape-4"></div>
+        </div>
+      </div>
+
       <div className="container">
         <div className="section-header">
           <h2>Contact Us & Enquiry</h2>
@@ -92,160 +101,205 @@ Please respond to my enquiry at your earliest convenience. Thank you! 🙏
           </p>
         </div>
 
-        <div className="contact-content">
-          <div className="contact-info">
-            <h3>Visit Our Spa</h3>
-
-            <div className="contact-item">
-              <h4>📍 Address</h4>
-              <p>
-                Plot No 14, Vijayapuri Colony, Above Union Bank Of India, Netaji
-                Nagar X Road <br />
-                Hyderabad, Kapra-500062 <br />
-                Telangana, India
-              </p>
+        <div className="contact-wrapper">
+          {/* Contact Information Cards */}
+          <div className="contact-cards">
+            <div className="contact-card">
+              <div className="card-icon">📍</div>
+              <div className="card-content">
+                <h4>Visit Our Spa</h4>
+                <p>
+                  Plot No 14, Vijayapuri Colony
+                  <br />
+                  Above Union Bank Of India
+                  <br />
+                  Netaji Nagar X Road
+                  <br />
+                  Hyderabad, Kapra-500062
+                  <br />
+                  Telangana, India
+                </p>
+              </div>
             </div>
 
-            <div className="contact-item">
-              <h4>📞 Phone</h4>
-              <p>
-                <a href="tel:+916309308175">+91 63093 08175</a>
-              </p>
+            <div className="contact-card">
+              <div className="card-icon">📞</div>
+              <div className="card-content">
+                <h4>Call Us</h4>
+                <p>
+                  <a href="tel:+916309308175">+91 63093 08175</a>
+                </p>
+              </div>
             </div>
 
-            <div className="contact-item">
-              <h4>✉️ Email</h4>
-              <p>
-                <a href="mailto:zenwellnesssaloonandspa@gmail.com">
-                  zenwellnesssaloonandspa@gmail.com
-                </a>
-              </p>
+            <div className="contact-card">
+              <div className="card-icon">✉️</div>
+              <div className="card-content">
+                <h4>Email Us</h4>
+                <p>
+                  <a href="mailto:zenwellnesssaloonandspa@gmail.com">
+                    zenwellnesssaloonandspa@gmail.com
+                  </a>
+                </p>
+              </div>
             </div>
 
-            <div className="contact-item">
-              <h4>⏰ Operating Hours</h4>
-              <p>
-                Monday - Sunday: 10:00 AM - 8:00 PM
-                <br />
-                Last appointment: 7:00 PM
-              </p>
+            <div className="contact-card">
+              <div className="card-icon">⏰</div>
+              <div className="card-content">
+                <h4>Operating Hours</h4>
+                <p>
+                  Monday - Sunday
+                  <br />
+                  10:00 AM - 8:00 PM
+                  <br />
+                  Last appointment: 7:00 PM
+                </p>
+              </div>
             </div>
 
-            <div className="social-media">
-              <h4>Follow Us</h4>
-              <div className="social-links">
-                <a href="#" className="social-link facebook">
-                  📘 Facebook
-                </a>
-                <a href="#" className="social-link instagram">
-                  📷 Instagram
-                </a>
-                <a href="#" className="social-link twitter">
-                  🐦 Twitter
-                </a>
-                <a
-                  href="#"
-                  className="social-link whatsapp"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const message = encodeURIComponent(
-                      "Hi! I'm interested in your spa services and would like to know more."
-                    );
-                    window.open(
-                      `https://wa.me/916309308175?text=${message}`,
-                      "_blank"
-                    );
-                  }}
-                >
-                  💬 WhatsApp
-                </a>
+            <div className="contact-card social-card">
+              <div className="card-icon">🌐</div>
+              <div className="card-content">
+                <h4>Follow Us</h4>
+                <div className="social-buttons">
+                  <a href="#" className="social-btn facebook">
+                    📘
+                  </a>
+                  <a href="#" className="social-btn instagram">
+                    📷
+                  </a>
+                  <a href="#" className="social-btn twitter">
+                    🐦
+                  </a>
+                  <a
+                    href="#"
+                    className="social-btn whatsapp"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const message = encodeURIComponent(
+                        "Hi! I'm interested in your spa services and would like to know more."
+                      );
+                      window.open(
+                        `https://wa.me/916309308175?text=${message}`,
+                        "_blank"
+                      );
+                    }}
+                  >
+                    💬
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="enquiry-form-container">
-            <h3>Send Us an Enquiry</h3>
-            <form className="enquiry-form" onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="enquiry-name">Your Name *</label>
-                <input
-                  type="text"
-                  id="enquiry-name"
-                  name="name"
-                  value={enquiryForm.name}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter your full name"
-                />
-              </div>
+          {/* Enquiry Form */}
+          <div className="enquiry-section">
+            <div className="form-header">
+              <h3>Send Us an Enquiry</h3>
+              <p>Fill out the form below and we'll get back to you soon</p>
+            </div>
 
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="enquiry-email">Email Address *</label>
+            <form className="enquiry-form" onSubmit={handleSubmit}>
+              <div className="input-group">
+                <div className="input-wrapper">
                   <input
-                    type="email"
-                    id="enquiry-email"
-                    name="email"
-                    value={enquiryForm.email}
+                    type="text"
+                    id="enquiry-name"
+                    name="name"
+                    value={enquiryForm.name}
                     onChange={handleChange}
                     required
-                    placeholder="Enter your email address"
+                    placeholder=" "
                   />
+                  <label htmlFor="enquiry-name">Your Name *</label>
+                  <div className="input-border"></div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="enquiry-phone">Phone Number</label>
-                  <input
-                    type="tel"
-                    id="enquiry-phone"
-                    name="phone"
-                    value={enquiryForm.phone}
+              </div>
+
+              <div className="input-row">
+                <div className="input-group">
+                  <div className="input-wrapper">
+                    <input
+                      type="email"
+                      id="enquiry-email"
+                      name="email"
+                      value={enquiryForm.email}
+                      onChange={handleChange}
+                      required
+                      placeholder=" "
+                    />
+                    <label htmlFor="enquiry-email">Email Address *</label>
+                    <div className="input-border"></div>
+                  </div>
+                </div>
+
+                <div className="input-group">
+                  <div className="input-wrapper">
+                    <input
+                      type="tel"
+                      id="enquiry-phone"
+                      name="phone"
+                      value={enquiryForm.phone}
+                      onChange={handleChange}
+                      placeholder=" "
+                    />
+                    <label htmlFor="enquiry-phone">Phone Number</label>
+                    <div className="input-border"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="input-group">
+                <div className="select-wrapper">
+                  <select
+                    id="enquiry-subject"
+                    name="subject"
+                    value={enquiryForm.subject}
                     onChange={handleChange}
-                    placeholder="Enter your phone number (optional)"
-                  />
+                    required
+                  >
+                    <option value="">Select a subject</option>
+                    <option value="General Enquiry">General Enquiry</option>
+                    <option value="Service Information">
+                      Service Information
+                    </option>
+                    <option value="Pricing Details">Pricing Details</option>
+                    <option value="Booking Assistance">
+                      Booking Assistance
+                    </option>
+                    <option value="Special Packages">Special Packages</option>
+                    <option value="Group Bookings">Group Bookings</option>
+                    <option value="Gift Vouchers">Gift Vouchers</option>
+                    <option value="Feedback">Feedback</option>
+                    <option value="Partnership Opportunities">
+                      Partnership Opportunities
+                    </option>
+                  </select>
+                  <label htmlFor="enquiry-subject">Subject *</label>
                 </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="enquiry-subject">Subject *</label>
-                <select
-                  id="enquiry-subject"
-                  name="subject"
-                  value={enquiryForm.subject}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Select a subject</option>
-                  <option value="General Enquiry">General Enquiry</option>
-                  <option value="Service Information">
-                    Service Information
-                  </option>
-                  <option value="Pricing Details">Pricing Details</option>
-                  <option value="Booking Assistance">Booking Assistance</option>
-                  <option value="Special Packages">Special Packages</option>
-                  <option value="Group Bookings">Group Bookings</option>
-                  <option value="Gift Vouchers">Gift Vouchers</option>
-                  <option value="Feedback">Feedback</option>
-                  <option value="Partnership Opportunities">
-                    Partnership Opportunities
-                  </option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="enquiry-message">Your Message *</label>
-                <textarea
-                  id="enquiry-message"
-                  name="message"
-                  value={enquiryForm.message}
-                  onChange={handleChange}
-                  rows="5"
-                  placeholder="Please describe your enquiry in detail. Include any specific questions about our services, pricing, or availability..."
-                  required
-                ></textarea>
+              <div className="input-group">
+                <div className="textarea-wrapper">
+                  <textarea
+                    id="enquiry-message"
+                    name="message"
+                    value={enquiryForm.message}
+                    onChange={handleChange}
+                    rows="5"
+                    required
+                    placeholder=" "
+                  ></textarea>
+                  <label htmlFor="enquiry-message">Your Message *</label>
+                  <div className="input-border"></div>
+                </div>
               </div>
 
               <button type="submit" className="submit-btn">
-                📱 Send via WhatsApp
+                <span className="btn-icon">📱</span>
+                <span className="btn-text">Send via WhatsApp</span>
+                <div className="btn-ripple"></div>
               </button>
 
               <p className="form-note">
@@ -256,24 +310,20 @@ Please respond to my enquiry at your earliest convenience. Thank you! 🙏
           </div>
         </div>
 
+        {/* Map Section */}
         <div className="map-section">
-          <h3>Find Us on Map</h3>
-          <div className="map-container">
-            <div className="map-info">
-              <p>🗺️ Our Location</p>
-              <p className="address-text">
-                Plot No 14, Vijayapuri Colony, Above Union Bank Of India, Netaji
-                Nagar X Road, Kapra-500062, Hyderabad, Telangana
-              </p>
-            </div>
+          <div className="map-header">
+            <h3>Find Us on Map</h3>
+            <p>Visit our spa for the ultimate relaxation experience</p>
+          </div>
 
-            {/* Working Google Maps Embed */}
+          <div className="map-container">
             <div className="map-embed">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.8234567890123!2d78.55435!3d17.485475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDI5JzA3LjciTiA3OMKwMzMnMTUuNyJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
                 width="100%"
-                height="350"
-                style={{ border: 0, borderRadius: "15px" }}
+                height="400"
+                style={{ border: 0 }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -282,11 +332,12 @@ Please respond to my enquiry at your earliest convenience. Thank you! 🙏
             </div>
 
             <div className="map-actions">
-              <button className="map-btn" onClick={openGoogleMaps}>
-                🗺️ Open in Google Maps
+              <button className="map-btn primary" onClick={openGoogleMaps}>
+                <span>🗺️</span>
+                Open in Google Maps
               </button>
               <button
-                className="map-btn directions-btn"
+                className="map-btn secondary"
                 onClick={() => {
                   const destination =
                     "Plot No 14, Vijayapuri Colony, Netaji Nagar X Road, Kapra-500062, Hyderabad";
@@ -298,7 +349,8 @@ Please respond to my enquiry at your earliest convenience. Thank you! 🙏
                   );
                 }}
               >
-                🧭 Get Directions
+                <span>🧭</span>
+                Get Directions
               </button>
             </div>
           </div>

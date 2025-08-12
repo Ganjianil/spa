@@ -1,20 +1,79 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./Hero.css";
 
 const Hero = () => {
   const videoRef = useRef(null);
+  const [isMuted, setIsMuted] = useState(true);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   useEffect(() => {
-    // Ensure video plays on load
-    if (videoRef.current) {
-      videoRef.current.play().catch((error) => {
-        console.log("Video autoplay failed:", error);
-      });
+    if (videoRef.current && !videoError) {
+      videoRef.current.muted = isMuted;
+
+      const playVideo = async () => {
+        try {
+          await videoRef.current.play();
+          console.log("Video started playing");
+          setVideoLoaded(true);
+        } catch (error) {
+          console.log("Video autoplay failed:", error);
+          // Fallback: try to play on user interaction
+          const retryPlay = async () => {
+            try {
+              await videoRef.current.play();
+              console.log("Video started playing after user interaction");
+              setVideoLoaded(true);
+            } catch (retryError) {
+              console.log("Retry autoplay failed:", retryError);
+              setVideoError(true);
+            }
+          };
+
+          document.addEventListener("click", retryPlay, { once: true });
+          document.addEventListener("touchstart", retryPlay, { once: true });
+        }
+      };
+
+      // Add a small delay to ensure video is ready
+      const timer = setTimeout(() => {
+        playVideo();
+      }, 100);
+
+      return () => clearTimeout(timer);
     }
-  }, []);
+  }, [isMuted, videoError]);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
+  const handleVideoLoad = () => {
+    console.log("Video loaded successfully");
+    setVideoLoaded(true);
+    setVideoError(false);
+  };
+
+  const handleVideoError = (e) => {
+    console.log("Video failed to load:", e);
+    setVideoLoaded(false);
+    setVideoError(true);
+  };
+
+  const handleVideoCanPlay = () => {
+    console.log("Video can play");
+    setVideoLoaded(true);
+    setVideoError(false);
+  };
+
+  const handleVideoLoadStart = () => {
+    console.log("Video load started");
+  };
 
   const handleBookNow = () => {
-    // Create custom modal for 3 options
     const modal = document.createElement("div");
     modal.className = "booking-modal-overlay";
     modal.innerHTML = `
@@ -52,10 +111,8 @@ const Hero = () => {
     document.body.appendChild(modal);
     document.body.style.overflow = "hidden";
 
-    // Add click handlers
     modal.addEventListener("click", (e) => {
       const action = e.target.closest("[data-action]")?.dataset.action;
-
       if (action === "call") {
         window.location.href = "tel:+916309308175";
         document.body.removeChild(modal);
@@ -83,32 +140,89 @@ const Hero = () => {
 
   return (
     <section id="home" className="hero">
-      {/* Background Video */}
       <div className="hero-video-container">
-        <video
-          ref={videoRef}
-          className="hero-video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-        >
-          {/* Multiple video sources for better compatibility */}
-          <source
-            src="https://player.vimeo.com/external/434045526.hd.mp4?s=c27eecc69a27dbc4ff2b87d38afc35f1a9e7c02d&profile_id=174"
-            type="video/mp4"
-          />
-          <source
-            src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4"
-            type="video/mp4"
-          />
-          {/* Fallback for browsers that don't support video */}
-          Your browser does not support the video tag.
-        </video>
+        {/* Fallback background image */}
+        <div className="hero-background-image"></div>
 
-        {/* Video overlay for better text readability */}
+        {!videoError && (
+          <video
+            ref={videoRef}
+            className={`hero-video ${videoLoaded ? "loaded" : ""}`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+            onLoadedData={handleVideoLoad}
+            onCanPlay={handleVideoCanPlay}
+            onLoadStart={handleVideoLoadStart}
+            onError={handleVideoError}
+            onPlay={() => {
+              console.log("Video is playing");
+              setVideoLoaded(true);
+            }}
+          >
+            {/* Reference video from public folder - use direct path */}
+            <source src="/yin.mp4" type="video/mp4" />
+            <source
+              src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4"
+              type="video/mp4"
+            />
+            <source
+              src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        )}
+
         <div className="hero-video-overlay"></div>
+
+        {!videoError && (
+          <button
+            className="mute-toggle-button"
+            onClick={toggleMute}
+            aria-label={isMuted ? "Unmute video" : "Mute video"}
+          >
+            {isMuted ? "🔇" : "🔊"}
+          </button>
+        )}
+
+        {/* Video loading indicator */}
+        {!videoLoaded && !videoError && (
+          <div className="video-loading">
+            <div className="loading-spinner"></div>
+            <p>Loading video...</p>
+          </div>
+        )}
+
+        {/* Video error fallback */}
+        {videoError && (
+          <div className="video-error">
+            <p>Video unavailable - showing beautiful spa imagery instead</p>
+          </div>
+        )}
+
+        {/* Debug info - remove this in production */}
+        <div
+          style={{
+            position: "absolute",
+            top: "10px",
+            left: "10px",
+            background: "rgba(0,0,0,0.7)",
+            color: "white",
+            padding: "10px",
+            fontSize: "12px",
+            zIndex: 1000,
+          }}
+        >
+          Video Loaded: {videoLoaded ? "Yes" : "No"}
+          <br />
+          Video Error: {videoError ? "Yes" : "No"}
+          <br />
+          Video Muted: {isMuted ? "Yes" : "No"}
+        </div>
       </div>
 
       <div className="hero-content">
@@ -121,14 +235,33 @@ const Hero = () => {
             tranquil environment.
           </p>
           <div className="hero-buttons">
-            <button className="cta-button primary" onClick={handleBookNow}>
-              Book Your Session
+            <button
+              className="cta-button primary"
+              onClick={handleBookNow}
+              aria-label="Book a spa session"
+            >
+              <span className="btn-text">Book Your Session</span>
+              <span className="btn-icon">✨</span>
             </button>
-            <button className="cta-button secondary" onClick={scrollToServices}>
-              View Services
+            <button
+              className="cta-button secondary"
+              onClick={scrollToServices}
+              aria-label="View spa services"
+            >
+              <span className="btn-text">View Services</span>
+              <span className="btn-icon">👁️</span>
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Floating elements for decoration */}
+      <div className="floating-elements">
+        <div className="floating-element element-1">🌸</div>
+        <div className="floating-element element-2">🍃</div>
+        <div className="floating-element element-3">✨</div>
+        <div className="floating-element element-4">🌿</div>
+        <div className="floating-element element-5">💫</div>
       </div>
     </section>
   );

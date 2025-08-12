@@ -1,6 +1,24 @@
 .about {
   padding: 100px 0;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  position: relative;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23000" opacity="0.02"/><circle cx="75" cy="75" r="1" fill="%23000" opacity="0.02"/><circle cx="50" cy="10" r="0.5" fill="%23000" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .about-content {
@@ -8,26 +26,37 @@
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .about-text h2 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: #2c3e50;
   margin-bottom: 20px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .about-text .lead {
-  font-size: 1.3rem;
-  color: #8e44ad;
-  font-weight: 600;
-  margin-bottom: 25px;
+  font-size: 1.4rem;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+  font-weight: 500;
+  line-height: 1.6;
+  font-style: italic;
 }
 
 .about-text p {
   font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 20px;
+  color: #555;
   line-height: 1.8;
+  margin-bottom: 25px;
+  text-align: justify;
 }
 
 .about-features {
@@ -37,72 +66,186 @@
 }
 
 .feature {
-  padding: 20px;
+  padding: 25px;
   background: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+  background-image: linear-gradient(white, white), 
+                    linear-gradient(135deg, #e74c3c, #f39c12);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
 }
 
 .feature:hover {
   transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .feature h4 {
   font-size: 1.2rem;
   color: #2c3e50;
   margin-bottom: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .feature p {
   color: #666;
   margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
+/* Image Styles */
 .about-image {
   position: relative;
 }
 
-.image-placeholder {
-  width: 100%;
-  height: 400px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+.spa-image-container {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
 }
 
-/* Mobile Styles */
-@media (max-width: 768px) {
-  .about {
-    padding: 60px 0;
-  }
-  
+.spa-image-container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+}
+
+.spa-interior-image {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.spa-image-container:hover .spa-interior-image {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: white;
+  padding: 40px 30px 30px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.spa-image-container:hover .image-overlay {
+  transform: translateY(0);
+}
+
+.overlay-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.overlay-content p {
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/* Decorative Elements */
+.about-image::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #e74c3c, #f39c12);
+  border-radius: 50%;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+.about-image::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  border-radius: 50%;
+  opacity: 0.08;
+  z-index: -1;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
   .about-content {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 50px;
+    text-align: center;
   }
   
   .about-text h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
+  }
+  
+  .about-text p {
     text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 80px 0;
+  }
+  
+  .about-text h2 {
+    font-size: 2.2rem;
   }
   
   .about-text .lead {
-    text-align: center;
+    font-size: 1.2rem;
   }
   
-  .image-placeholder {
-    height: 300px;
+  .about-text p {
+    font-size: 1rem;
+  }
+  
+  .spa-interior-image {
+    height: 400px;
+  }
+  
+  .about-features {
+    gap: 20px;
+  }
+  
+  .feature {
+    padding: 20px;
   }
 }
 
 @media (max-width: 480px) {
+  .about {
+    padding: 60px 0;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+  
+  .about-content {
+    gap: 40px;
+  }
+  
   .about-text h2 {
     font-size: 1.8rem;
   }
@@ -111,12 +254,83 @@
     font-size: 1.1rem;
   }
   
-  .about-text p {
-    font-size: 1rem;
+  .spa-interior-image {
+    height: 300px;
   }
   
-  .image-placeholder {
-    height: 250px;
-    font-size: 1rem;
+  .feature h4 {
+    font-size: 1.1rem;
+  }
+  
+  .feature p {
+    font-size: 0.9rem;
+  }
+  
+  .image-overlay {
+    padding: 30px 20px 20px;
+  }
+  
+  .overlay-content h3 {
+    font-size: 1.3rem;
+  }
+  
+  .overlay-content p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Animation for scroll reveal */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-text {
+  animation: fadeInUp 0.8s ease;
+}
+
+.about-image {
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .spa-image-container,
+  .spa-interior-image,
+  .image-overlay,
+  .feature,
+  .about-text,
+  .about-image {
+    transition: none;
+    animation: none;
+  }
+  
+  .spa-image-container:hover {
+    transform: none;
+  }
+  
+  .spa-image-container:hover .spa-interior-image {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .about {
+    background: white;
+  }
+  
+  .feature {
+    border: 2px solid #000;
+  }
+  
+  .image-overlay {
+    background: rgba(0, 0, 0, 0.9);
   }
 }

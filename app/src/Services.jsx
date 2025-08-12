@@ -72,6 +72,9 @@ const Services = () => {
       price60: "₹2,000",
       description: "Relaxing full-body massage to relieve stress and tension",
       benefits: ["Stress relief", "Muscle relaxation", "Improved circulation"],
+      image:
+        "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      alt: "Relaxing spa massage therapy session",
     },
     {
       name: "Couple Massage",
@@ -81,6 +84,9 @@ const Services = () => {
       price60: "₹4,500",
       description: "Romantic spa experience for couples in our private suite",
       benefits: ["Bonding experience", "Shared relaxation", "Private suite"],
+      image:
+        "https://plus.unsplash.com/premium_photo-1661574718355-82659c0c74cc?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      alt: "Couple enjoying massage together in spa",
     },
     {
       name: "Body Scrub",
@@ -89,6 +95,9 @@ const Services = () => {
       description:
         "Exfoliating treatment to remove dead skin and reveal smooth, glowing skin",
       benefits: ["Skin exfoliation", "Improved texture", "Deep cleansing"],
+      image:
+        "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      alt: "Body scrub treatment with natural ingredients",
     },
     {
       name: "Face Detox Pack",
@@ -97,6 +106,9 @@ const Services = () => {
       description:
         "Deep cleansing facial treatment to detoxify and rejuvenate your skin",
       benefits: ["Deep cleansing", "Pore purification", "Skin detoxification"],
+      image:
+        "https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      alt: "Facial detox treatment with clay mask",
     },
     {
       name: "Facial Treatment",
@@ -104,6 +116,9 @@ const Services = () => {
       price: "₹2,000",
       description: "Customized facial treatment for all skin types",
       benefits: ["Skin hydration", "Anti-aging", "Glowing complexion"],
+      image:
+        "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      alt: "Professional facial treatment session",
     },
   ];
 
@@ -119,8 +134,11 @@ const Services = () => {
         <div className="services-grid">
           {services.map((service, index) => (
             <div key={index} className="service-card">
-              <div className="service-header">
-                <h3>{service.name}</h3>
+              <div className="service-image">
+                <img src={service.image} alt={service.alt} loading="lazy" />
+                <div className="service-overlay">
+                  <h3>{service.name}</h3>
+                </div>
               </div>
               <div className="service-content">
                 <p className="service-description">{service.description}</p>

@@ -39,8 +39,19 @@ const About = () => {
             </div>
           </div>
           <div className="about-image">
-            <div className="image-placeholder">
-              <p>Spa Interior Image</p>
+            <div className="spa-image-container">
+              <img
+                src="https://plus.unsplash.com/premium_photo-1723867490491-10519f8ed969?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Luxurious spa interior with candles, towels, and peaceful ambiance"
+                className="spa-interior-image"
+                loading="lazy"
+              />
+              <div className="image-overlay">
+                <div className="overlay-content">
+                  <h3>Tranquil Spa Environment</h3>
+                  <p>Experience serenity in our beautifully designed spaces</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

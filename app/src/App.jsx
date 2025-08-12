@@ -22,7 +22,6 @@ function App() {
       <Images />
 
       <Amenities />
-      <Stats />
 
       <Deals />
       <BookNow />
